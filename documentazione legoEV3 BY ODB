@@ -1,0 +1,96 @@
+Descrizione delle Classi e Metodi
+
+
+  Class Client
+La classe Client estende JFrame ed è responsabile per la creazione dell'interfaccia utente e la gestione della comunicazione con il server.
+
+
+  Variabili di Istanza
+
+JTextArea displayArea: un'area di testo per visualizzare i comandi inviati.
+PrintWriter out: un oggetto per inviare comandi al server.
+Costruttore
+
+Client(String serverAddress): Configura la finestra GUI, crea una connessione socket al server e aggiunge un listener per gli eventi della tastiera.
+
+ 
+  Metodi
+
+main(String[] args): Punto di ingresso dell'applicazione che crea e visualizza l'istanza Client.
+Dettagli Implementativi
+Interfaccia Grafica
+
+La finestra principale è configurata con un titolo e dimensioni predefinite.
+Viene creata un'area di testo non modificabile per visualizzare i comandi inviati.
+L'area di testo è aggiunta al centro della finestra.
+Connessione al Server
+
+Un socket viene creato per connettersi al server all'indirizzo IP specificato e porta 12345.
+PrintWriter è utilizzato per inviare comandi attraverso il socket.
+Gestione degli Eventi della Tastiera
+
+keyPressed(KeyEvent e): Questo metodo determina quale tasto è stato premuto e invia il comando corrispondente al server, aggiornando anche l'area di visualizzazione.
+keyReleased(KeyEvent e): Invia il comando "stop" al server quando un tasto viene rilasciato.
+Messa a Fuoco della Finestra
+
+setFocusable(true) e setFocusTraversalKeysEnabled(false) assicurano che la finestra possa ricevere eventi della tastiera.
+Utilizzo
+Per eseguire l'applicazione, è necessario:
+
+Compilare il codice sorgente Java.
+Eseguire l'applicazione fornendo l'indirizzo del server che gestisce il robot LEGO MINDSTORM EV3.
+
+  Requisiti
+Java Development Kit (JDK)
+Server configurato per accettare connessioni su 10.0.1.1 alla porta 12345 per controllare il robot.
+ 
+  
+  
+
+ 
+  Class Server
+La classe Server gestisce la comunicazione con il client e controlla i motori del robot LEGO MINDSTORM EV3.
+
+
+  Variabili di Istanza
+
+NXTRegulatedMotor leftMotor: rappresenta il motore sinistro del robot.
+NXTRegulatedMotor rightMotor: rappresenta il motore destro del robot.
+
+  
+
+  Metodi
+
+main(String[] args): Metodo principale che avvia il server, attende una connessione client e gestisce i comandi ricevuti.
+moveForward(): Muove il robot in avanti sincronizzando entrambi i motori.
+moveBackward(): Muove il robot indietro sincronizzando entrambi i motori.
+turnLeft(): Gira il robot a sinistra sincronizzando il motore sinistro all'indietro e il motore destro in avanti.
+turnRight(): Gira il robot a destra sincronizzando il motore sinistro in avanti e il motore destro all'indietro.
+stop(): Ferma entrambi i motori del robot.
+setSpeed(): Imposta la velocità di entrambi i motori.
+synchronizeMotors(): Sincronizza il motore sinistro con il motore destro per movimenti coordinati.
+Dettagli Implementativi
+Avvio del Server
+
+ServerSocket viene creato e ascolta sulla porta 12345.
+Il server attende una connessione client e una volta connesso, imposta i flussi di input e output.
+Sincronizzazione dei Motori
+
+synchronizeMotors(): Sincronizza il motore sinistro con il motore destro per garantire movimenti coordinati.
+Impostazione della Velocità
+
+setSpeed(): Imposta la velocità di entrambi i motori a 1000 unità.
+Gestione dei Comandi
+
+Il server legge continuamente i comandi dal client e li esegue utilizzando una serie di metodi che controllano i motori del robot.
+Utilizzo
+Per eseguire il server, è necessario:
+
+Compilare il codice sorgente Java.
+Eseguire l'applicazione server che si metterà in ascolto sulla porta 12345 e attenderà i comandi dal client.
+
+
+  Requisiti
+Java Development Kit (JDK)
+Librerie di controllo dei motori di LEGO MINDSTORM EV3 (lejos)
+Un robot LEGO MINDSTORM EV3 configurato con i motori collegati alle porte A e B.
